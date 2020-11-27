@@ -7,14 +7,17 @@ import './App.css';
 import MissionSelector from './MissionSelector';
 
 function App() {
+  const {value, selector} = MissionSelector()
+
   return (
     <div className="App">
       <header className="App-header">
         <SplitPane split="horizontal">
           <div>
-            <MissionSelector />
+            {selector}
           </div>
           <div>
+            <p>Your thing is {value.title}</p>
             <img src={logo} className="App-logo" alt="logo" />
             <p>
               Edit

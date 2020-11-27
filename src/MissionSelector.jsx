@@ -1,25 +1,33 @@
-import {
-  Dropdown, DropdownToggle, DropdownMenu, DropdownItem,
-} from 'reactstrap';
-import React, { useState } from 'react';
+import React, {useState} from 'react';
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Dropdown from 'react-bootstrap/Dropdown'
 
 const MissionSelector = () => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+    const missions = [
+        {
+            'key': 'dm1',
+            'title': "Demo 1",
+        },
+        {
+            'key': 'crew-1',
+            'title': " Crew 1",
+        },
+    ]
 
-  const toggle = () => setDropdownOpen((prevState) => !prevState);
+    const [value, setValue] = useState(missions[0])
 
-  const missions = ['DM1', 'CREW-1'];
+    const handleSelect = (missionKey) => {
+        console.log(missionKey);
+        setValue(missionKey = missions.filter(mission => mission.key === missionKey)[0])
+    }
 
-  return (
-    <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-      <DropdownToggle caret>
-        Select Mission
-      </DropdownToggle>
-      <DropdownMenu>
-        {missions.map((mission) => <DropdownItem>{mission}</DropdownItem>)}
-      </DropdownMenu>
-    </Dropdown>
-  );
+    return {
+        value, selector: (
+                <DropdownButton title={value.title} onSelect={handleSelect}>
+                    {missions.map(mission => <Dropdown.Item key={mission.key} eventKey={mission.key}>{mission.title}</Dropdown.Item>)}
+                </DropdownButton>
+        )
+    };
 };
 
 export default MissionSelector;
