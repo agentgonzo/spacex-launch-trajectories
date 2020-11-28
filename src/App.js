@@ -5,6 +5,30 @@ import logo from './logo.svg';
 import './App.css';
 import MissionSelector from './MissionSelector';
 import {Nav, Navbar} from "react-bootstrap";
+import PropTypes from 'prop-types'
+
+
+class SpacexNavBar extends React.Component {
+    static get propTypes() {
+        return {
+            title: PropTypes.string,
+            selector: PropTypes.any
+        };
+    }
+
+    render() {
+        return <Navbar bg='light' fixed="top">
+            <Navbar.Collapse id="basic-navbar-nav">
+                <Navbar.Brand href="/">SpaceX Launch Trajectories</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+                <Nav className="mr-auto">
+                    <Nav.Item>{this.props.title}</Nav.Item>
+                </Nav>
+                {this.props.selector}
+            </Navbar.Collapse>
+        </Navbar>
+    }
+}
 
 function App() {
     const missionFromUrl = window.location.hash.replace("#", "")
@@ -13,16 +37,7 @@ function App() {
 
     return (
             <div className="App">
-                <Navbar bg='light' fixed="top">
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Navbar.Brand href="/">SpaceX Launch Trajectories</Navbar.Brand>
-                        <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-                        <Nav className="mr-auto">
-                            <Nav.Item>{mission.title}, launched {launch}</Nav.Item>
-                        </Nav>
-                        {selector}
-                    </Navbar.Collapse>
-                </Navbar>
+                <SpacexNavBar title={`${mission.title}, launched ${launch}`} selector={selector}/>
                 <header className="App-header">
                     <div>
                         <p>You selected {mission.title}</p>
