@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import NavDropdown from "react-bootstrap/NavDropdown";
 
-const MissionSelector = () => {
+const MissionSelector = (initialMission) => {
     const missions = [
         {
             'key': 'dm1',
@@ -20,17 +20,23 @@ const MissionSelector = () => {
         },
     ]
 
-    const [value, setValue] = useState(missions[0])
+    const getMissionByKey = (missionKey => missions.filter(mission => mission.key === missionKey)[0])
+    const [mission, setValue] = useState(getMissionByKey(initialMission))
 
-    const handleSelect = (missionKey) => {
+    const selectMission = (missionKey) => {
         console.log(missionKey);
-        setValue(missionKey = missions.filter(mission => mission.key === missionKey)[0])
+        setValue(getMissionByKey(missionKey))
     }
 
     return {
-        mission: value, selector: (
-                <NavDropdown title={value.title} onSelect={handleSelect}>
-                    {missions.map(mission => <NavDropdown.Item key={mission.key} eventKey={mission.key}>{mission.title}</NavDropdown.Item>)}
+        mission, selector: (
+                <NavDropdown title={mission.title} onSelect={selectMission}>
+                    {missions.map(mission => <NavDropdown.Item
+                            key={mission.key}
+                            eventKey={mission.key}
+                            href={`#${mission.key}`}>
+                        {mission.title}
+                    </NavDropdown.Item>)}
                 </NavDropdown>
         )
     };

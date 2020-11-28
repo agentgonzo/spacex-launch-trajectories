@@ -4,12 +4,11 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import MissionSelector from './MissionSelector';
-import {Image, Nav, Navbar} from "react-bootstrap";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import {Nav, Navbar} from "react-bootstrap";
 
 function App() {
-    const {mission, selector} = MissionSelector()
-
+    const missionFromUrl = window.location.hash.replace("#", "")
+    const {mission, selector} = MissionSelector(missionFromUrl)
     const launch = new Date(mission.launch).toLocaleString()
 
     return (
