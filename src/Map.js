@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import GoogleMapReact from 'google-map-react'
 import Image from "react-bootstrap/Image";
 import capsule from "./assets/capsule.png"
@@ -12,8 +12,8 @@ const Capsule = () => <Image src={capsule} width={20} height={20}/>;
 
 export const Map = (met) => {
     const location = {
-        lat: KSC.lat + met * 0.02,
-        lng: KSC.lng + met * 0.01
+        lat: KSC.lat + Math.max(0, (met * 0.2)),
+        lng: KSC.lng + Math.max(0, (met * 0.1))
     }
 
     return (

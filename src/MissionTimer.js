@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 
-export const MissionTimer = (running) => {
+export const MissionTimer = () => {
+    const [running, setRunning] = useState(false)
     const [met, setMet] = useState(-10)
 
     useEffect(() => {
@@ -10,10 +11,10 @@ export const MissionTimer = (running) => {
             }, 100);
             return () => clearInterval(interval);
         }
-    }, [met]);
+    }, [running, met]);
 
     return {
         met,
-        timer: (<p>T: {met.toFixed(1)}s</p>)
+        setTimerRunning: setRunning
     }
 }
