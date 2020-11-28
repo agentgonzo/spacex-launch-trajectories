@@ -15,7 +15,7 @@ function App() {
             <div className="App">
                 <Navbar bg='light' fixed="top">
                     <Navbar.Collapse id="basic-navbar-nav">
-                        <Navbar.Brand>SpaceX Launch Trajectories</Navbar.Brand>
+                        <Navbar.Brand href="/">SpaceX Launch Trajectories</Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                         <Nav className="mr-auto">
                             <Nav.Item>{mission.title}, launched {launch}</Nav.Item>

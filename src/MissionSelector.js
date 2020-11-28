@@ -21,7 +21,7 @@ const MissionSelector = (initialMission) => {
     ]
 
     const getMissionByKey = (missionKey => missions.filter(mission => mission.key === missionKey)[0])
-    const [mission, setValue] = useState(getMissionByKey(initialMission))
+    const [mission, setValue] = useState(getMissionByKey(initialMission) || getMissionByKey('crew-1'))
 
     const selectMission = (missionKey) => {
         console.log(missionKey);
