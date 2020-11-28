@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import DropdownButton from "react-bootstrap/DropdownButton";
-import Dropdown from 'react-bootstrap/Dropdown'
+import NavDropdown from "react-bootstrap/NavDropdown";
 
 const MissionSelector = () => {
     const missions = [
@@ -30,9 +29,9 @@ const MissionSelector = () => {
 
     return {
         mission: value, selector: (
-                <DropdownButton title={value.title} onSelect={handleSelect}>
-                    {missions.map(mission => <Dropdown.Item key={mission.key} eventKey={mission.key}>{mission.title}</Dropdown.Item>)}
-                </DropdownButton>
+                <NavDropdown title={value.title} onSelect={handleSelect}>
+                    {missions.map(mission => <NavDropdown.Item key={mission.key} eventKey={mission.key}>{mission.title}</NavDropdown.Item>)}
+                </NavDropdown>
         )
     };
 };

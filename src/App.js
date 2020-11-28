@@ -19,24 +19,14 @@ function App() {
                         <Navbar.Brand>SpaceX Launch Trajectories</Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                         <Nav className="mr-auto">
-                            <Nav.Item>{mission.title}: {launch}</Nav.Item>
+                            <Nav.Item>{mission.title}, launched {launch}</Nav.Item>
                         </Nav>
-                        <Nav>
-                            <NavDropdown title="Select Mission" id="basic-nav-dropdown">
-                                <NavDropdown.Item href="#dm1">Demo 1</NavDropdown.Item>
-                                <NavDropdown.Item href="#dm2">Demo 2</NavDropdown.Item>
-                                <NavDropdown.Item href="#crew1">Crew 1</NavDropdown.Item>
-                            </NavDropdown>
-                        </Nav>
+                        {selector}
                     </Navbar.Collapse>
                 </Navbar>
                 <header className="App-header">
-
                     <div>
-                        {selector}
-                    </div>
-                    <div>
-                        <p>Your thing is {mission.title}</p>
+                        <p>You selected {mission.title}</p>
                         <img src={logo} className="App-logo" alt="logo"/>
                         <p>
                             Edit
