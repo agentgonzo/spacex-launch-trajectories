@@ -5,8 +5,10 @@ import './App.css';
 import MissionSelector from './MissionSelector';
 import {Nav, Navbar} from "react-bootstrap";
 import PropTypes from 'prop-types'
+import {GoogleMap, Marker, withGoogleMap, withScriptjs} from "react-google-maps"
 import SplitPane from "react-split-pane";
 import ReactPlayer from "react-player";
+import {SpacexMap} from "./Map";
 
 class SpacexNavBar extends React.Component {
     static get propTypes() {
@@ -17,7 +19,7 @@ class SpacexNavBar extends React.Component {
     }
 
     render() {
-        return <Navbar bg='light' fixed="top">
+        return <Navbar bg='light'>
             <Navbar.Collapse id="basic-navbar-nav">
                 <Navbar.Brand href="/">SpaceX Launch Trajectories</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
@@ -41,7 +43,7 @@ function App() {
                     <SplitPane split="vertical" allowResize={true} defaultSize="50%">
                         <p>hello</p>
                         <SplitPane allowResize={true} defaultSize="50%" split="horizontal">
-                            <p>Top</p>
+                            <SpacexMap/>
                             <ReactPlayer url={mission.video} width="100%" height="100%"/>
                         </SplitPane>
                     </SplitPane>
