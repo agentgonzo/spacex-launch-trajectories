@@ -1,12 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import MissionSelector from './MissionSelector';
 import {Nav, Navbar} from "react-bootstrap";
 import PropTypes from 'prop-types'
-
+import SplitPane from "react-split-pane";
+import ReactPlayer from "react-player";
 
 class SpacexNavBar extends React.Component {
     static get propTypes() {
@@ -38,27 +38,13 @@ function App() {
     return (
             <div className="App">
                 <SpacexNavBar title={`${mission.title}, launched ${launch}`} selector={selector}/>
-                <header className="App-header">
-                    <div>
-                        <p>You selected {mission.title}</p>
-                        <img src={logo} className="App-logo" alt="logo"/>
-                        <p>
-                            Edit
-                            {' '}
-                            <code>src/App.js</code>
-                            {' '}
-                            and save to reload.
-                        </p>
-                        <a
-                                className="App-link"
-                                href="https://reactjs.org"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                        >
-                            Learn React
-                        </a>
-                    </div>
-                </header>
+                    <SplitPane split="vertical" allowResize={true} defaultSize="50%">
+                        <p>hello</p>
+                        <SplitPane allowResize={true} defaultSize="50%" split="horizontal">
+                            <p>Top</p>
+                            <ReactPlayer url={mission.video} width="100%" height="100%"/>
+                        </SplitPane>
+                    </SplitPane>
             </div>
     );
 }

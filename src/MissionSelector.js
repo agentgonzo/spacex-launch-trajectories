@@ -7,16 +7,19 @@ const MissionSelector = (initialMission) => {
             'key': 'dm1',
             'title': "Demo-1",
             'launch': '2019-03-02T07:49:03Z',
+            'video': 'https://www.youtube.com/watch?v=2ZL0tbOZYhE&feature=youtu.be&t=2931'
         },
         {
             'key': 'dm2',
             'title': "Demo-2",
             'launch': '2020-05-30T19:22:45Z',
+            'video': 'https://www.youtube.com/watch?v=xY96v0OIcK4&feature=youtu.be&t=15756'
         },
         {
             'key': 'crew-1',
             'title': " Crew-1",
-            'launch': '2020-11-16T00:27:17Z'
+            'launch': '2020-11-16T00:27:17Z',
+            'video': 'https://www.youtube.com/watch?v=E_FIaPBOJgc&feature=youtu.be&t=15150'
         },
     ]
 
