@@ -6,11 +6,11 @@ import PropTypes from 'prop-types'
 
 
 const KSC = {
-    lat: 28.6080,
-    lng: -80.6047
+    lat: 28.6082,
+    lng: -80.60415
 };
 
-const Capsule = () => <Image src={capsule} width={20} height={20}/>;
+const Capsule = () => <Image className="Capsule" src={capsule}/>;
 
 export const Map = (props) => {
     const location = {
@@ -22,11 +22,16 @@ export const Map = (props) => {
             // Important! Always set the container height explicitly
             <div style={{height: '100%', width: '100%'}}>
                 <GoogleMapReact
+                        options={getMapOptions}
                         bootstrapURLKeys={{key: "AIzaSyCvcqPLVfUMZdwaXIJej3oZsRpQbTw_KFs"}}
                         defaultCenter={KSC}
-                        defaultZoom={2}
+                        defaultZoom={18}
                 >
-                    <Capsule lat={location.lat} lng={location.lng}/>
+                    <Capsule lat={location.lat} lng={location.lng} style={{
+                        position: 'absolute',
+                        transform: 'translate(-50%, -50%)',
+                        boxShadow: '3px'
+                    }}/>
                 </GoogleMapReact>
             </div>
     );
