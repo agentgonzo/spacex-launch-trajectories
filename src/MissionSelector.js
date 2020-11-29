@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import NavDropdown from "react-bootstrap/NavDropdown";
+import PropTypes from 'prop-types'
 
 const missions = [
     {
@@ -71,12 +72,12 @@ export const useMissionTimer = () => {
     }
 }
 
-const MissionSelector = (mission, onChange) => {
+const MissionSelector = (props) => {
     const selectMission = (missionKey) => {
-        onChange(getMissionByKey(missionKey))
+        props.onChange(getMissionByKey(missionKey))
     }
 
-    return <NavDropdown title={mission.title} onSelect={selectMission}>
+    return <NavDropdown title={props.mission.title} onSelect={selectMission}>
         {missions.map(mission => <NavDropdown.Item
                 key={mission.key}
                 eventKey={mission.key}
@@ -84,6 +85,10 @@ const MissionSelector = (mission, onChange) => {
             {mission.title}
         </NavDropdown.Item>)}
     </NavDropdown>
+}
+MissionSelector.propTypes = {
+    mission: PropTypes.object,
+    onChange: PropTypes.func,
 }
 
 export default MissionSelector;

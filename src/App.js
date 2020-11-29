@@ -16,13 +16,14 @@ const SpacexNavBar = (props) => {
             <Nav className="mr-auto">
                 <Nav.Item>{props.title}</Nav.Item>
             </Nav>
-            {props.selector}
+            <MissionSelector mission={props.mission} onChange={props.onMissionChange}/>
         </Navbar.Collapse>
     </Navbar>
 }
 SpacexNavBar.propTypes = {
     title: PropTypes.string,
-    selector: PropTypes.any
+    mission: PropTypes.object,
+    onMissionChange: PropTypes.func,
 }
 
 function App() {
@@ -37,7 +38,7 @@ function App() {
     }
 
     return <div className="App">
-        <SpacexNavBar title={`${mission.title}, launched ${launch}`} selector={MissionSelector(mission, onMissionChange)}/>
+        <SpacexNavBar title={`${mission.title}, launched ${launch}`} mission={mission} onMissionChange={onMissionChange}/>
         <MissionView mission={mission} met={met} start={start} pause={pause} reset={reset}/>
     </div>
 }
