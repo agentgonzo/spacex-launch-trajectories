@@ -8,26 +8,21 @@ import PropTypes from 'prop-types'
 
 import {MissionView} from "./MissionView";
 
-class SpacexNavBar extends React.Component {
-    static get propTypes() {
-        return {
-            title: PropTypes.string,
-            selector: PropTypes.any
-        };
-    }
-
-    render() {
-        return <Navbar bg='light'>
-            <Navbar.Collapse id="basic-navbar-nav">
-                <Navbar.Brand href="/">SpaceX Launch Trajectories</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-                <Nav className="mr-auto">
-                    <Nav.Item>{this.props.title}</Nav.Item>
-                </Nav>
-                {this.props.selector}
-            </Navbar.Collapse>
-        </Navbar>
-    }
+const SpacexNavBar = (props) => {
+    return <Navbar bg='light'>
+        <Navbar.Collapse id="basic-navbar-nav">
+            <Navbar.Brand href="/">SpaceX Launch Trajectories</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+            <Nav className="mr-auto">
+                <Nav.Item>{props.title}</Nav.Item>
+            </Nav>
+            {props.selector}
+        </Navbar.Collapse>
+    </Navbar>
+}
+SpacexNavBar.propTypes = {
+    title: PropTypes.string,
+    selector: PropTypes.any
 }
 
 function App() {
