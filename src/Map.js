@@ -12,8 +12,8 @@ const Capsule = () => <Image src={capsule} width={20} height={20}/>;
 
 export const Map = (met) => {
     const location = {
-        lat: KSC.lat + Math.max(0, (met * 0.2)),
-        lng: KSC.lng + Math.max(0, (met * 0.1))
+        lat: KSC.lat + Math.max(0, (met * 0.0002)),
+        lng: KSC.lng + Math.max(0, (met * 0.0001))
     }
 
     return (

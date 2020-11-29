@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import NavDropdown from "react-bootstrap/NavDropdown";
 
 const missions = [
@@ -23,6 +23,53 @@ const missions = [
 ]
 
 export const getMissionByKey = (missionKey => missions.filter(mission => mission.key === missionKey)[0])
+
+export const useMissionTimer = () => {
+    const [startTime, setStartTime] = useState(null)
+    const [pauseTime, setPauseTime] = useState(null)
+    const [running, setRunning] = useState(false)
+    const [met, setMet] = useState(0)
+
+    const start = () => {
+        if(startTime == null) {
+            setStartTime(Date.now())
+        }
+        if(pauseTime) {
+            // We've previously paused the timer, so we need to reset the start time to take account of the pause
+            const pauseDuration = Date.now() - pauseTime
+            setStartTime(startTime + pauseDuration)
+        }
+        setRunning(true)
+    }
+
+    const pause = () => {
+        setPauseTime(Date.now())
+        setRunning(false)
+    }
+
+    const reset = () => {
+        setStartTime(null)
+        setPauseTime(null)
+        setRunning(false)
+        setMet(0)
+    }
+
+    useEffect(() => {
+        if(running) {
+            const interval = setInterval(() => {
+                setMet(Date.now() - startTime)
+            }, 100);
+            return () => clearInterval(interval);
+        }
+    }, [running]);
+
+    return {
+        start,
+        pause,
+        reset,
+        met: met - 10000 // milliseconds
+    }
+}
 
 const MissionSelector = (mission, onChange) => {
     const selectMission = (missionKey) => {
