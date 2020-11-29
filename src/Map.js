@@ -18,6 +18,22 @@ export const Map = (props) => {
         lng: KSC.lng + Math.max(0, (props.met * 0.0001))
     }
 
+    const getMapOptions = (maps) => {
+        return  {
+            fullscreenControl: false,
+            mapTypeId: maps.MapTypeId.SATELLITE,
+            mapTypeControlOptions: {
+                style: maps.MapTypeControlStyle.HORIZONTAL_BAR,
+                position: maps.ControlPosition.TOP_LEFT,
+                mapTypeIds: [
+                    maps.MapTypeId.ROADMAP,
+                    maps.MapTypeId.SATELLITE,
+                    maps.MapTypeId.HYBRID
+                ]
+            },
+        }
+    }
+
     return (
             // Important! Always set the container height explicitly
             <div style={{height: '100%', width: '100%'}}>
@@ -25,13 +41,9 @@ export const Map = (props) => {
                         options={getMapOptions}
                         bootstrapURLKeys={{key: "AIzaSyCvcqPLVfUMZdwaXIJej3oZsRpQbTw_KFs"}}
                         defaultCenter={KSC}
-                        defaultZoom={18}
+                        defaultZoom={6}
                 >
-                    <Capsule lat={location.lat} lng={location.lng} style={{
-                        position: 'absolute',
-                        transform: 'translate(-50%, -50%)',
-                        boxShadow: '3px'
-                    }}/>
+                    <Capsule lat={location.lat} lng={location.lng}/>
                 </GoogleMapReact>
             </div>
     );
