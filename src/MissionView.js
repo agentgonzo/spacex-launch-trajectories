@@ -3,12 +3,15 @@ import {Map} from "./Map";
 import ReactPlayer from "react-player";
 import React from "react";
 import PropTypes from "prop-types";
+import {MissionData} from "./MissionData";
+import {MissionGraph} from "./MissionGraph";
 
 export const MissionView = (props) => {
     return <SplitPane split="vertical" allowResize={true} defaultSize="50%">
-        <div>
-            <p>T: {(props.met / 1000).toFixed(1)}s</p>
-        </div>
+        <SplitPane split="horizonal" allowResize={true} defaultSize="50%">
+            <MissionData met={props.met}/>
+            <MissionGraph start={props.start} pause={props.pause} reset={props.reset}/>
+        </SplitPane>
         <SplitPane allowResize={true} defaultSize="50%" split="horizontal">
             <Map met={props.met}/>
             <ReactPlayer
