@@ -3,13 +3,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, {useState} from 'react';
 import './App.css';
 import MissionSelector, {getMissionByKey, useMissionTimer} from './MissionSelector';
-import {Nav, Navbar} from "react-bootstrap";
+import {Nav, Navbar, Table} from "react-bootstrap";
 import PropTypes from 'prop-types'
 
 import {MissionView} from "./MissionView";
 
 const SpacexNavBar = (props) => {
-    return <Navbar bg='light'>
+    return <Navbar bg='light' fixed="top">
         <Navbar.Collapse id="basic-navbar-nav">
             <Navbar.Brand href="/">SpaceX Launch Trajectories</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav"/>

@@ -68,7 +68,7 @@ export const useMissionTimer = () => {
         start,
         pause,
         reset,
-        met: met - 10000 // milliseconds
+        met: (met - 10000) / 1000
     }
 }
 

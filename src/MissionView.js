@@ -7,10 +7,10 @@ import {MissionData} from "./MissionData";
 import {MissionGraph} from "./MissionGraph";
 
 export const MissionView = (props) => {
-    return <SplitPane split="vertical" allowResize={true} defaultSize="50%">
+    return <SplitPane className="Steve" split="vertical" allowResize={true} defaultSize="50%">
         <SplitPane split="horizonal" allowResize={true} defaultSize="50%">
             <MissionData met={props.met}/>
-            <MissionGraph start={props.start} pause={props.pause} reset={props.reset}/>
+            <MissionGraph start={props.start} pause={props.pause} reset={props.reset} met={props.met}/>
         </SplitPane>
         <SplitPane allowResize={true} defaultSize="50%" split="horizontal">
             <Map met={props.met}/>
