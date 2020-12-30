@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/spacex-launch-trajectories/static/css/main.5b0260a3.chunk.css",
-    "main.js": "/spacex-launch-trajectories/static/js/main.b8d9ec62.chunk.js",
-    "main.js.map": "/spacex-launch-trajectories/static/js/main.b8d9ec62.chunk.js.map",
-    "runtime-main.js": "/spacex-launch-trajectories/static/js/runtime-main.7d34e5c1.js",
-    "runtime-main.js.map": "/spacex-launch-trajectories/static/js/runtime-main.7d34e5c1.js.map",
+    "main.css": "/spacex-launch-trajectories/static/css/main.764c6ebf.chunk.css",
+    "main.js": "/spacex-launch-trajectories/static/js/main.ec0cf7a1.chunk.js",
+    "main.js.map": "/spacex-launch-trajectories/static/js/main.ec0cf7a1.chunk.js.map",
+    "runtime-main.js": "/spacex-launch-trajectories/static/js/runtime-main.ffaf62b2.js",
+    "runtime-main.js.map": "/spacex-launch-trajectories/static/js/runtime-main.ffaf62b2.js.map",
     "static/css/2.1a02f21c.chunk.css": "/spacex-launch-trajectories/static/css/2.1a02f21c.chunk.css",
-    "static/js/2.2db3f157.chunk.js": "/spacex-launch-trajectories/static/js/2.2db3f157.chunk.js",
-    "static/js/2.2db3f157.chunk.js.map": "/spacex-launch-trajectories/static/js/2.2db3f157.chunk.js.map",
-    "static/js/3.094b99fe.chunk.js": "/spacex-launch-trajectories/static/js/3.094b99fe.chunk.js",
-    "static/js/3.094b99fe.chunk.js.map": "/spacex-launch-trajectories/static/js/3.094b99fe.chunk.js.map",
+    "static/js/2.7c70a1bf.chunk.js": "/spacex-launch-trajectories/static/js/2.7c70a1bf.chunk.js",
+    "static/js/2.7c70a1bf.chunk.js.map": "/spacex-launch-trajectories/static/js/2.7c70a1bf.chunk.js.map",
+    "static/js/3.52d7ae17.chunk.js": "/spacex-launch-trajectories/static/js/3.52d7ae17.chunk.js",
+    "static/js/3.52d7ae17.chunk.js.map": "/spacex-launch-trajectories/static/js/3.52d7ae17.chunk.js.map",
     "index.html": "/spacex-launch-trajectories/index.html",
     "static/css/2.1a02f21c.chunk.css.map": "/spacex-launch-trajectories/static/css/2.1a02f21c.chunk.css.map",
-    "static/css/main.5b0260a3.chunk.css.map": "/spacex-launch-trajectories/static/css/main.5b0260a3.chunk.css.map",
-    "static/js/2.2db3f157.chunk.js.LICENSE.txt": "/spacex-launch-trajectories/static/js/2.2db3f157.chunk.js.LICENSE.txt",
+    "static/css/main.764c6ebf.chunk.css.map": "/spacex-launch-trajectories/static/css/main.764c6ebf.chunk.css.map",
+    "static/js/2.7c70a1bf.chunk.js.LICENSE.txt": "/spacex-launch-trajectories/static/js/2.7c70a1bf.chunk.js.LICENSE.txt",
     "static/media/capsule.eb412449.png": "/spacex-launch-trajectories/static/media/capsule.eb412449.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.7d34e5c1.js",
+    "static/js/runtime-main.ffaf62b2.js",
     "static/css/2.1a02f21c.chunk.css",
-    "static/js/2.2db3f157.chunk.js",
-    "static/css/main.5b0260a3.chunk.css",
-    "static/js/main.b8d9ec62.chunk.js"
+    "static/js/2.7c70a1bf.chunk.js",
+    "static/css/main.764c6ebf.chunk.css",
+    "static/js/main.ec0cf7a1.chunk.js"
   ]
 }
