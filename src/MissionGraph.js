@@ -3,13 +3,8 @@ import React, {useState} from "react";
 import {Button} from "react-bootstrap";
 import ScatterChart from "recharts/lib/chart/ScatterChart";
 
-// import crew1 from './assets/crew1.json'
 import {CartesianGrid, Legend, Scatter, Tooltip, XAxis, YAxis, ZAxis} from "recharts";
-import {useMissionData} from "./MissionData";
-
-// const telemetry = crew1.map( data => {
-//     return data
-// })
+import {useAcceleration, useMissionData} from "./MissionData";
 
 const RenderNoShape = (props) => {
     return null;
@@ -18,13 +13,16 @@ const RenderNoShape = (props) => {
 export const MissionGraph = (props) => {
     const [points, setPoints] = useState([])
     const missionData = useMissionData(props.met)
+    const acceleration = useAcceleration(missionData)
+    // const missionData = {}
 
     if (props.met < 0 && points.length > 0) {
         setPoints([]) // Hacky
-    } else if (props.met * 10 > points.length) { // Add a point to the graph every second
+    } else if (props.met > points.length) { // Add a point to the graph every second
         missionData.met = props.met
+        missionData.acceleration = acceleration
         points.push(missionData)
-        // setPoints(points)
+        setPoints(points)
     }
 
     return <div>
@@ -32,10 +30,12 @@ export const MissionGraph = (props) => {
         <ScatterChart width={600} height={300}>
             <CartesianGrid/>
             <XAxis type="number" dataKey="met" name="met"/>
-            <YAxis yAxisId="left" type="number" dataKey="velocity" name="velocity" unit="km/s"/>
+            <YAxis yAxisId="left" type="number" dataKey="velocity" name="velocity" unit="km/h"/>
             <YAxis yAxisId="right" type="number" dataKey="altitude" name="altitude" orientation="right" unit="km"/>
+            <YAxis yAxisId="righta" type="number" dataKey="acceleration" name="acceleration" orientation="right" unit="km/h/s"/>
             <Scatter yAxisId="left" name="velocity" data={points} line fill="#008800" shape={<RenderNoShape/>}/>
             <Scatter yAxisId="right" name="altitude" data={points} line fill="#8884d8" shape={<RenderNoShape/>}/>
+            <Scatter yAxisId="righta" name="acceleration" data={points} line fill="#880000" shape={<RenderNoShape/>}/>
             <Tooltip cursor={{strokeDasharray: '3 3'}}/>
             <Legend/>
         </ScatterChart>
