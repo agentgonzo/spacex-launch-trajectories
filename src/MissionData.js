@@ -65,17 +65,14 @@ export const useAcceleration2 = (missionData) => {
 export const useAcceleration = (missionData) => {
     const previousMissionData = useRef(missionData)
     const previousAcceleration = useRef(0)
-
-    let acceleration = (missionData.velocity - previousMissionData.current.velocity) / (missionData.met - previousMissionData.current.met)
-    // if (acceleration !== 0) {
-    //     previousAcceleration.current = acceleration
-    // }
+    const acceleration = (missionData.velocity - previousMissionData.current.velocity) / (missionData.met - previousMissionData.current.met)
 
     if (missionData.met !== previousMissionData.current.met) {
         previousMissionData.current = missionData
         previousAcceleration.current = acceleration
     }
-    return previousAcceleration.current
+    // Convert from km/h/s into g
+    return previousAcceleration.current / 3.6 / 9.8
 }
 
 export const MissionData = (props) => {
@@ -100,7 +97,7 @@ export const MissionData = (props) => {
             </tr>
             <tr>
                 <td>Acceleration</td>
-                <td>{(acceleration / 3.6 / 9.8).toFixed(1)}g</td>
+                <td>{(acceleration).toFixed(1)}g</td>
             </tr>
         </tbody>
     </Table>

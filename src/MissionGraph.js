@@ -14,7 +14,6 @@ export const MissionGraph = (props) => {
     const [points, setPoints] = useState([])
     const missionData = useMissionData(props.met)
     const acceleration = useAcceleration(missionData)
-    // const missionData = {}
 
     if (props.met < 0 && points.length > 0) {
         setPoints([]) // Hacky
@@ -30,14 +29,13 @@ export const MissionGraph = (props) => {
         <ScatterChart width={600} height={300}>
             <CartesianGrid/>
             <XAxis type="number" dataKey="met" name="met"/>
-            <YAxis yAxisId="left" type="number" dataKey="velocity" name="velocity" unit="km/h"/>
-            <YAxis yAxisId="right" type="number" dataKey="altitude" name="altitude" orientation="right" unit="km"/>
-            <YAxis yAxisId="righta" type="number" dataKey="acceleration" name="acceleration" orientation="right" unit="km/h/s"/>
-            <Scatter yAxisId="left" name="velocity" data={points} line fill="#008800" shape={<RenderNoShape/>}/>
-            <Scatter yAxisId="right" name="altitude" data={points} line fill="#8884d8" shape={<RenderNoShape/>}/>
-            <Scatter yAxisId="righta" name="acceleration" data={points} line fill="#880000" shape={<RenderNoShape/>}/>
-            <Tooltip cursor={{strokeDasharray: '3 3'}}/>
-            <Legend/>
+            <YAxis yAxisId="velocity" type="number" dataKey="velocity" name="velocity" unit="km/h" stroke="green"/>
+            <YAxis yAxisId="altitude" type="number" dataKey="altitude" name="altitude" orientation="right" unit="km" stroke="blue"/>
+            <YAxis yAxisId="acceleration" type="number" dataKey="acceleration" name="acceleration" orientation="right" unit="g" stroke="red"/>
+            <Scatter yAxisId="velocity" name="velocity" data={points} line fill="green" shape={<RenderNoShape/>}/>
+            <Scatter yAxisId="altitude" name="altitude" data={points} line fill="blue" shape={<RenderNoShape/>}/>
+            <Scatter yAxisId="acceleration" name="acceleration" data={points} line fill="red" shape={<RenderNoShape/>}/>
+            <Legend layout="vertical"/>
         </ScatterChart>
     </div>
 }
