@@ -55,13 +55,6 @@ export const useMissionData = (met) => {
     }
 }
 
-export const useAcceleration2 = (missionData) => {
-    const step = 1
-    const previous = useMissionData(missionData.met - step)
-    let number = (missionData.velocity - previous.velocity) / step;
-    return number < 100 && number > -100 ? number : 0
-}
-
 export const useAcceleration = (missionData) => {
     const previousMissionData = useRef(missionData)
     const previousAcceleration = useRef(0)
@@ -75,11 +68,41 @@ export const useAcceleration = (missionData) => {
     return previousAcceleration.current / 3.6 / 9.8
 }
 
+export const useDownrange = (missionData) => {
+    const previousMissionData = useRef(missionData)
+    const previousDownrange = useRef(0)
+    const previousVelocity = useRef(0)
+    const previousAltitude = useRef(0)
+
+    const altChange = missionData.altitude - previousAltitude.current
+    // avgVel is in km/h - we want km/s
+    const avgVel = (missionData.velocity + previousVelocity.current) / 2 / 3600
+    const displacement = avgVel * (missionData.met - previousMissionData.current.met)
+
+    // Use pythagoras to get the downrange change
+    const downrange = Math.sqrt(Math.pow(displacement, 2) - Math.pow(altChange, 2) ) || 0
+    console.log(downrange)
+
+    if(missionData.met < 0) {
+        previousDownrange.current = 0
+    }
+
+    if (missionData.met !== previousMissionData.current.met) {
+        previousMissionData.current = missionData
+        previousAltitude.current = missionData.altitude
+        previousVelocity.current = missionData.velocity
+        previousDownrange.current = previousDownrange.current + downrange
+    }
+
+    return previousDownrange.current
+}
+
 export const MissionData = (props) => {
     const met = (props.met)
     const missionData = useMissionData(met)
 
-    const acceleration = useAcceleration(missionData);
+    const acceleration = useAcceleration(missionData)
+    const downrange = useDownrange(missionData)
 
     return <Table striped border hover size="sm">
         <tbody>
@@ -98,6 +121,10 @@ export const MissionData = (props) => {
             <tr>
                 <td>Acceleration</td>
                 <td>{(acceleration).toFixed(1)}g</td>
+            </tr>
+            <tr>
+                <td>Downrange</td>
+                <td>{(downrange).toFixed(1)}km</td>
             </tr>
         </tbody>
     </Table>
