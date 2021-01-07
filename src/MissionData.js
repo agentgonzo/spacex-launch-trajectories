@@ -20,12 +20,12 @@ export const useMissionData = (met) => {
     const pointer = useRef(0)
     if (met < 0) {
         pointer.current = 0
+        initialData.met = met
         return initialData
     }
 
     // Set the pointer be the frame at-or-before the current MET
     while (met > telemetry[pointer.current].met) {
-        // console.log("advance")
         pointer.current++
     }
     const ptr = pointer.current
@@ -61,6 +61,10 @@ export const useAcceleration = (missionData) => {
     const previousAcceleration = useRef(0)
     const acceleration = (missionData.velocity - previousMissionData.current.velocity) / (missionData.met - previousMissionData.current.met)
 
+    if (missionData.met < 0) {
+        previousAcceleration.current = 0
+    }
+
     if (missionData.met !== previousMissionData.current.met) {
         previousMissionData.current = missionData
         previousAcceleration.current = acceleration
@@ -82,7 +86,6 @@ export const useDownrange = (missionData) => {
 
     // Use pythagoras to get the downrange change
     const downrange = Math.sqrt(Math.pow(displacement, 2) - Math.pow(altChange, 2) ) || 0
-    console.log(downrange)
 
     if(missionData.met < 0) {
         previousDownrange.current = 0
@@ -98,49 +101,46 @@ export const useDownrange = (missionData) => {
     return previousDownrange.current
 }
 
-export const MissionData = (props) => {
-    const met = (props.met)
-    const missionData = useMissionData(met)
-
-    const acceleration = useAcceleration(missionData)
-    const downrange = useDownrange(missionData)
-
+export const useLocation = (downrange) => {
     const KSC = {
         lat: 28.6082,
         lng: -80.60415
-    };
+    }
     const ksc = new LatLon(KSC.lat, KSC.lng)
-    const location = ksc.destinationPoint(downrange * 1000, 51.6)
 
+    return ksc.destinationPoint(downrange * 1000, 51.6)
+}
+
+export const MissionData = (props) => {
     return <Table striped border hover size="sm">
         <tbody>
             <tr>
                 <td>Mission Elapsed Time</td>
-                <td>{met.toFixed(1)}s</td>
+                <td>{props.data.met.toFixed(1)}s</td>
             </tr>
             <tr>
                 <td>Altitude</td>
-                <td>{missionData.altitude.toFixed(2)}km</td>
+                <td>{props.data.altitude.toFixed(2)}km</td>
             </tr>
             <tr>
                 <td>Velocity</td>
-                <td>{missionData.velocity.toFixed(0)}km/h</td>
+                <td>{props.data.velocity.toFixed(0)}km/h</td>
             </tr>
             <tr>
                 <td>Acceleration</td>
-                <td>{(acceleration).toFixed(1)}g</td>
+                <td>{props.data.acceleration.toFixed(1)}g</td>
             </tr>
             <tr>
                 <td>Downrange</td>
-                <td>{(downrange).toFixed(1)}km</td>
+                <td>{props.data.downrange.toFixed(1)}km</td>
             </tr>
             <tr>
                 <td>Location</td>
-                <td>{location.toString('dms', 0)}</td>
+                <td>{props.data.location.toString('dms', 0)}</td>
             </tr>
         </tbody>
     </Table>
 }
 MissionData.propTypes = {
-    met: PropTypes.number
+    data: PropTypes.object
 }

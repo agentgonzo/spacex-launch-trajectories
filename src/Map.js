@@ -15,12 +15,6 @@ const KSC = {
 const Capsule = () => <Image className="Capsule" src={capsule}/>;
 
 export const Map = (props) => {
-    const missionData = useMissionData(props.met)
-    const downrange = useDownrange(missionData)
-
-    const ksc = new LatLon(KSC.lat, KSC.lng)
-    const location = ksc.destinationPoint(downrange * 1000, 51.6)
-
     const getMapOptions = (maps) => {
         return  {
             fullscreenControl: false,
@@ -46,11 +40,11 @@ export const Map = (props) => {
                         defaultCenter={KSC}
                         defaultZoom={6}
                 >
-                    <Capsule lat={location.lat} lng={location.lng}/>
+                    <Capsule lat={props.location.lat} lng={props.location.lng}/>
                 </GoogleMapReact>
             </div>
     );
 }
 Map.propTypes = {
-    met: PropTypes.number
+    location: PropTypes.object
 }

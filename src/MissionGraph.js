@@ -4,23 +4,19 @@ import {Button} from "react-bootstrap";
 import ScatterChart from "recharts/lib/chart/ScatterChart";
 
 import {CartesianGrid, Legend, Scatter, Tooltip, XAxis, YAxis, ZAxis} from "recharts";
-import {useAcceleration, useMissionData} from "./MissionData";
 
-const RenderNoShape = (props) => {
+const RenderNoShape = () => {
     return null;
 }
 
 export const MissionGraph = (props) => {
     const [points, setPoints] = useState([])
-    const missionData = useMissionData(props.met)
-    const acceleration = useAcceleration(missionData)
 
-    if (props.met < 0 && points.length > 0) {
+    if (props.data.met < 0 && points.length > 0) {
         setPoints([]) // Hacky
-    } else if (props.met > points.length) { // Add a point to the graph every second
-        missionData.met = props.met
-        missionData.acceleration = acceleration
-        points.push(missionData)
+    } else if (props.data.met > points.length) { // Add a point to the graph every second
+        props.data.met = props.data.met
+        points.push(props.data)
         setPoints(points)
     }
 
@@ -40,7 +36,7 @@ export const MissionGraph = (props) => {
     </div>
 }
 MissionGraph.propTypes = {
-    met: PropTypes.number,
+    data: PropTypes.object,
     start: PropTypes.func,
     pause: PropTypes.func,
     reset: PropTypes.func,
