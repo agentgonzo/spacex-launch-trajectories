@@ -3,6 +3,8 @@ import GoogleMapReact from 'google-map-react'
 import Image from "react-bootstrap/Image";
 import capsule from "./assets/capsule.png"
 import PropTypes from 'prop-types'
+import {useDownrange, useMissionData} from "./MissionData";
+import LatLon from "geodesy/latlon-ellipsoidal-vincenty";
 
 
 const KSC = {
@@ -13,10 +15,11 @@ const KSC = {
 const Capsule = () => <Image className="Capsule" src={capsule}/>;
 
 export const Map = (props) => {
-    const location = {
-        lat: KSC.lat + Math.max(0, (props.met * 0.0002)),
-        lng: KSC.lng + Math.max(0, (props.met * 0.0001))
-    }
+    const missionData = useMissionData(props.met)
+    const downrange = useDownrange(missionData)
+
+    const ksc = new LatLon(KSC.lat, KSC.lng)
+    const location = ksc.destinationPoint(downrange * 1000, 51.6)
 
     const getMapOptions = (maps) => {
         return  {

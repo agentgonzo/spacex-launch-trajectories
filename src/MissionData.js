@@ -1,8 +1,9 @@
 import {Table} from "react-bootstrap";
-import React, {useEffect, useRef} from "react";
+import React, {useRef} from "react";
 import PropTypes from 'prop-types'
 import data from './assets/crew1.json'
 import Spline from 'cubic-spline';
+import LatLon from "geodesy/latlon-ellipsoidal-vincenty.js";
 
 const telemetry = data.map( data => {
     return data
@@ -104,6 +105,13 @@ export const MissionData = (props) => {
     const acceleration = useAcceleration(missionData)
     const downrange = useDownrange(missionData)
 
+    const KSC = {
+        lat: 28.6082,
+        lng: -80.60415
+    };
+    const ksc = new LatLon(KSC.lat, KSC.lng)
+    const location = ksc.destinationPoint(downrange * 1000, 51.6)
+
     return <Table striped border hover size="sm">
         <tbody>
             <tr>
@@ -125,6 +133,10 @@ export const MissionData = (props) => {
             <tr>
                 <td>Downrange</td>
                 <td>{(downrange).toFixed(1)}km</td>
+            </tr>
+            <tr>
+                <td>Location</td>
+                <td>{location.toString('dms', 0)}</td>
             </tr>
         </tbody>
     </Table>
